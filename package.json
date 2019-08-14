@@ -1,0 +1,22 @@
+{
+  "name": "myexpenser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "angular-datatables": "^0.6.2",
+    "custom-electron-titlebar": "^3.0.10",
+    "electron": "^5.0.6",
+    "electron-titlebar": "^0.0.3",
+    "jquery": "^3.4.1",
+    "sql-wasm": "^1.1.4",
+    "sql.js": "^1.0.0",
+    "windows10-fluently-titlebar": "^3.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nadeera",
+  "license": "MIT"
+}

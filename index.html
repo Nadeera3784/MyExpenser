@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/materialdesignicons.css">
+    <link rel="stylesheet" href="css/dataTables.bootstrap4.css">
+    <link rel="stylesheet" href="css/dataTables.css">
+    <link rel="stylesheet" href="css/notie.css">
+    <link rel="stylesheet" href="css/angular-switchery.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body ng-app="App">
+    <div id="electron-titlebar" class="drag"></div>
+    <div class="nav-side">
+			<nav class="navigation">
+				<div class="container">
+					<div class="menu collapse" id="content">
+						<ul id="menu">
+							<li ng-class="{'active': $route.current.activeclass == '/'}"><a href="#/!"><i class="mdi mdi-format-align-left mdi-24px"></i></a></li>
+							<li ng-class="{'active': $route.current.activeclass == 'category'}"><a href="#!category"><i class="mdi mdi-wallet mdi-24px"></i></a></li>
+							<li ng-class="{'active': $route.current.activeclass == 'settings'}"><a href="#!settings"><i class="mdi mdi-settings-outline mdi-24px"></i></a></li>
+						</ul>
+					</div>
+				</div>
+            </nav>
+    <div class="main">
+    <div class="container pt-5">
+            <div ng-view></div> 
+    </div>
+    </div>
+</div>
+	<script>
+        window.$ = window.jQuery = require('./js/jquery.js');
+    </script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery.dataTables.js"></script>
+    <script src="js/dataTables.bootstrap4.js"></script>
+    <script src="js/dataTables.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/angular-datatables.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script src="js/angular-switchery.js"></script>
+    <script src="js/Chartjs.js"></script>
+    <script src="js/Chart.extension.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/sql-wasm.js"></script>
+    <script src="js/contextmenu.js"></script>
+    <script src="controller/controller.js"></script>
+</body>
+</html>

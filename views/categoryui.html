@@ -1,0 +1,53 @@
+<div class="row" ng-controller="categoryController">
+    <div class="col-md-12">
+            <div class="card mt-3">
+                <div class="header">
+                    <h2>Categories</h2>
+                    <div class="tools">
+                        <button type="button" class="btn btn-sm btn-danger"  ng-click="addModal()"><i class="mdi mdi-plus-circle-outline"></i> New</button>
+                    </div>
+                </div>
+                <div class="body">
+                    <table datatable="ng" dt-options="dtOptions" dt-instance="dtInstance" class="table table-padded">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  ng-repeat="item in items"  context-menu="ContextMenu" context-menu-on="contextmenu">
+                                <td> {{item[1]}}</td>
+                            </tr>                
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">New Category</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="NewRForm" name="NewRForm"  novalidate> 
+                                    <div class="form-group">
+                                        <label for="title"> Title</label>
+                                        <input ng-model="title" id="title" name="title" class="form-control" ng-class="{ 'is-invalid' : NewRForm.title.$invalid && !NewRForm.title.$pristine }" type="text" required>
+                                        <div ng-show="NewRForm.title.$dirty && NewRForm.title.$error.required" class="invalid-feedback">Title is required</div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" ng-click="newItem()" class="btn btn-sm btn-light" ng-disabled="NewRForm.$invalid"><i class="mdi mdi-checkbox-marked-circle-outline"></i> Add</button>
+                                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="mdi mdi-close-circle-outline"></i> Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            </div>
+    </div>
+</div>

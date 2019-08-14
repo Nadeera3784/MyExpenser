@@ -1,0 +1,131 @@
+<div class="row" ng-controller="appController">
+    <div class="col-sm-4  pt-3">
+        <a class="element-box widget-box" href="index.html#">
+            <div class="label">Income</div>
+            <div class="value">{{incomeCount}}</div>
+            <div class="trending trending-down-basic"><span>9%</span><i class="mdi mdi-arrow-down"></i></div>
+        </a>
+    </div>
+    <div class="col-sm-4  pt-3">
+        <a class="element-box widget-box" href="index.html#">
+            <div class="label">Expense</div>
+            <div class="value">{{expenseCount}}</div>
+            <div class="trending trending-up-basic"><span>88%</span><i class="mdi mdi-arrow-up"></i></div>
+        </a>
+    </div>
+    <div class="col-sm-4  pt-3">
+        <a class="element-box widget-box" href="index.html#">
+            <div class="label">Balance</div>
+            <div class="value">{{balanceCount | numberformatter}}</div>
+            <div class="trending trending-down-basic"><span>3%</span><i class="mdi mdi-arrow-down"></i></div>
+        </a>
+    </div>
+    <div class="col-md-8">
+            <div class="card">
+                <div class="header">
+                    <h2>Latest Transactions </h2>
+                    <div class="tools">
+                        <button type="button" class="btn btn-sm btn-danger"  ng-click="addModal()"><i class="mdi mdi-plus-circle-outline"></i> New</button>
+                    </div>
+                </div>
+                <div class="body">
+                    <table datatable="ng" dt-options="dtOptions" dt-instance="dtInstance" class="table table-padded dataTables-transactions">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  ng-repeat="item in items"  context-menu="ContextMenu" context-menu-on="contextmenu">
+                                <td><span><a href="#">{{item[4] | dateformatter}}</a></span></td>
+                                <td><span class="badge badge-soft-{{item[8] | badgeformatter}}">{{item[8]}}</span></td>
+                                <td>Rs {{item[3]}}</td>
+                                <td> {{item[6]}}</td>
+                            </tr>                                                
+                        </tbody>
+                    </table>
+                    <input type="hidden" id="tableRender" ng-click="dtInstance.rerender()">
+                </div>
+            </div>
+
+            <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Add New</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="NewRForm" name="NewRForm"  novalidate> 
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for=""> Type</label>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="pay-option">
+                                                            <input class="pay-option-check required" type="radio" ng-model="identity_type"  id="payeth" name="identity_type" value="2">
+                                                                <label class="pay-option-label" for="payeth">
+                                                                    <span class="pay-title"><em class="pay-icon cf cf-eth"><i class="mdi mdi-arrow-down"></i></em>
+                                                                      <span class="pay-cur">Income</span>
+                                                                    </span>
+                                                               </label>
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="pay-option">
+                                                            <input class="pay-option-check required" type="radio" ng-model="identity_type" id="expense" name="identity_type" value="1">
+                                                                <label class="pay-option-label" for="expense">
+                                                                    <span class="pay-title"><em class="pay-icon cf cf-eth"><i class="mdi mdi-arrow-up"></i></em>
+                                                                       <span class="pay-cur">Expense</span>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                                <div ng-show="typeError" class="invalid-feedback">Type is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="category"> Category</label>
+                                        <select class="form-control" ng-class="{ 'is-invalid' : selectError }" name="category" ng-model="category" id="category" ng-change="selectionValidator()">
+                                            <option value="">Please Select...</option>
+                                            <option ng-repeat="category in categories" value="{{category[0]}}">{{category[1]}}</option>
+                                        </select>
+                                        <div ng-show="selectError" class="invalid-feedback">Category is required</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="amount"> Amount</label>
+                                        <input ng-model="amount" id="amount" name="amount" class="form-control" ng-class="{ 'is-invalid' : NewRForm.amount.$invalid && !NewRForm.amount.$pristine }" type="text" required>
+                                        <div ng-show="NewRForm.amount.$dirty && NewRForm.amount.$error.required" class="invalid-feedback">Amount is required</div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" ng-click="newItem()" class="btn btn-sm btn-light" ng-disabled="NewRForm.$invalid"><i class="mdi mdi-checkbox-marked-circle-outline"></i> Add</button>
+                                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal"><i class="mdi mdi-close-circle-outline"></i> Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="header">
+                <h2>Weekly Report </h2>
+                <div class="tools"></div>
+            </div>
+            <div class="body">
+               <div class="chart">
+                    <canvas id="ordersChart" class="chart-canvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,7 +6,7 @@
   "dependencies": {
     "angular-datatables": "^0.6.2",
     "custom-electron-titlebar": "^3.0.10",
-    "electron": "^5.0.6",
+    "electron": "^7.2.4",
     "electron-titlebar": "^0.0.3",
     "jquery": "^3.4.1",
     "sql-wasm": "^1.1.4",
